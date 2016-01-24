@@ -21,4 +21,4 @@ build:
 
 run:
 	echo "running application"
-	xdg-open main.html
+	xdg-open helloworld.html
