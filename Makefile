@@ -9,15 +9,16 @@ prequisities:
 	npm install -g browserify
 	npm install --save react react-dom babelify babel-preset-react
 
+install:
+	echo "installs all that is required by react excample"
+	make nodeenv
+	make prequisities
+	make build
+
 build:
 	echo "building application"
 	browserify -t [ babelify --presets [ react ] ] main.js -o bundle.js
 
-test:
-	echo "running tests"
-
-install:
-	echo "run some installing stuff... ??"
-
 run:
 	echo "running application"
+	xdg-open helloworld.html
