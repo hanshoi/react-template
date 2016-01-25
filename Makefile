@@ -1,9 +1,3 @@
-nodeenv:
-	echo "setup nodeenv for this project"
-	sudo pip install nodeenv
-	nodeenv --prebuilt .rtenv
-	. .rtenv/bin/activate
-
 prequisities:
 	echo "setting up development environment with all the prequisities"
 	npm install -g browserify
@@ -11,7 +5,6 @@ prequisities:
 
 install:
 	echo "installs all that is required by react excample"
-	make nodeenv
 	make prequisities
 	make build
 
