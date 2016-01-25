@@ -1,0 +1,14 @@
+{
+  "name": "gulp-browserify-react",
+  "version": "0.0.1",
+  "description": "Example of combining gulp and browserify with react",
+  "author": "Antti Ruotsalainen",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.5.5",
+    "gulp-react": "^3.1.0",
+    "gulp-uglify": "^1.5.1"
+  }
+}
