@@ -3,3 +3,4 @@ eproject.cfg
 node_modules
 bundle.js
 .env
+*.log

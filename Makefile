@@ -1,6 +1,7 @@
+
 prequisities:
 	echo "setting up development environment with all the prequisities"
-	npm install -g browserify
+	npm install -g browserify watchify
 	npm install --save react react-dom babelify babel-preset-react
 
 install:
@@ -11,6 +12,10 @@ install:
 build:
 	echo "building application"
 	browserify -t [ babelify --presets [ react ] ] main.js -o bundle.js
+
+watch:
+	echo "start watchify watching"
+	watchify -t [ babelify --presets [ react ] ] main.js -o bundle.js
 
 run:
 	echo "running application"
