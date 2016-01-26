@@ -9,7 +9,10 @@ var browserify = require('browserify'),
     destFile = 'bundle.js';
 
 gulp.task('browserify', function() {
-  return browserify(sourceFile)
+  return browserify(sourceFile, {
+    cache: {},
+    packageCache: {},
+  })
   .bundle()
   .pipe(source(destFile))
   .pipe(gulp.dest(destFolder));

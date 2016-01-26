@@ -1,51 +1,69 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var react = require('gulp-react');
 var htmlreplace = require('gulp-html-replace');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var reactify = require('reactify');
+var streamify = require('gulp-streamify');
 
 var path = {
   HTML: 'main.html',
-  ALL: ['js/*.js', 'js/**/*.js', 'main.html'],
-  JS: ['js/child.js', 'js/parent.js', 'js/*.js', 'js/**/*.js'],
   MINIFIED_OUT: 'build.min.js',
+  OUT: 'build.js',
   DEST_SRC: 'dist/js',
   DEST_BUILD: 'dist/build',
-  DEST: 'dist'
+  DEST: 'dist',
+  ENTRYPOINT: './js/app.js'
 };
 
 
-// Transform JSX to JS code
-gulp.task('transform', function(){
-  gulp.src(path.JS)
-    .pipe(react())
-    .pipe(gulp.dest(path.DEST_SRC));
-});
-
-// copy main.html to a new destination folder
+// copy html into build folder
 gulp.task('copy', function(){
   gulp.src(path.HTML)
     .pipe(gulp.dest(path.DEST));
 });
 
-// watch all our files and if they change run copy and transform tasks
-gulp.task('watch', function(){
-  gulp.watch(path.ALL, ['transform', 'copy']);
+// main development task
+gulp.task('watch', function() {
+  gulp.watch(path.HTML, ['copy']);
+
+  var b  = watchify(browserify({
+    entries: [path.ENTRY_POINT],
+    transform: [reactify],
+    debug: true,
+    cache: {}, packageCache: {}, fullPaths: true
+  }));
+  
+  function rebundle() {
+    return b.bundle()
+      .pipe(source(path.OUT))
+      .pipe(gulp.dest(path.DEST_SRC))
+  };
+
+
+  b.on('update', rebundle);
+  return rebundle()
 });
 
+// default task
+gulp.task('default', ['copy', 'watch']);
 
-// BUILD
-
-// create a concatenated and minified JS file build.min.js
+//PRODUCTION
+// build
 gulp.task('build', function(){
-  gulp.src(path.JS)
-    .pipe(react())
-    .pipe(concat(path.MINIFIED_OUT))
-    .pipe(uglify())
+  browserify({
+    entries: [path.ENTRY_POINT],
+//    transform: [reactify]
+  })
+    .transform("babelify", {presets: ["react"]})
+    .bundle()
+    .pipe(source(path.MINIFIED_OUT))
+//    .pipe(streamify(uglify()))
     .pipe(gulp.dest(path.DEST_BUILD));
 });
 
-// replace all references within <-- build:js --> tags to single reference of build.min.js
+// replace HTML
 gulp.task('replaceHTML', function(){
   gulp.src(path.HTML)
     .pipe(htmlreplace({
@@ -54,8 +72,5 @@ gulp.task('replaceHTML', function(){
     .pipe(gulp.dest(path.DEST));
 });
 
-// production task to group all steps
+// create the main production task
 gulp.task('production', ['replaceHTML', 'build']);
-
-// default tasks
-gulp.task('default', ['watch']);
