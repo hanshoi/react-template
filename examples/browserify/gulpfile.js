@@ -4,11 +4,19 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 
 var path = {
+  HTML: 'main.html',
   OUT: 'build.js',
   DEST_SRC: 'dist/js',
   DEST: 'dist',
   ENTRYPOINT: './js/app.js'
 };
+
+
+// copy html into build folder
+gulp.task('copy', function(){
+  gulp.src(path.HTML)
+    .pipe(gulp.dest(path.DEST));
+});
 
 // build
 gulp.task('build', function(){
@@ -23,4 +31,4 @@ gulp.task('build', function(){
 });
 
 // default task
-gulp.task('default', ['build']);
+gulp.task('default', ['copy', 'build']);
