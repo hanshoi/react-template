@@ -21,3 +21,6 @@ A basic printing of "Hello World!" into html. This illustrates the installing of
 1. go to dir `cd examples/helloworld`
 2. install all necessary items `make install`
 3. run web page with `make run`
+
+#### Gulp & Browserify
+Implementation variation of the [Tyler McGinnes tutorial on gulp and browserify](http://tylermcginnis.com/reactjs-tutorial-pt-2-building-react-applications-with-gulp-and-browserify/).
