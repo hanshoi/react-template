@@ -29,7 +29,7 @@ gulp.task('watch', function() {
   gulp.watch(path.HTML, ['copy']);
 
   var b  = watchify(browserify({
-    entries: [path.ENTRY_POINT],
+    entries: [path.ENTRYPOINT],
     transform: [reactify],
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
@@ -43,7 +43,7 @@ gulp.task('watch', function() {
 
 
   b.on('update', rebundle);
-  return rebundle()
+  return rebundle();
 });
 
 // default task
@@ -53,13 +53,12 @@ gulp.task('default', ['copy', 'watch']);
 // build
 gulp.task('build', function(){
   browserify({
-    entries: [path.ENTRY_POINT],
-//    transform: [reactify]
+    entries: [path.ENTRYPOINT],
+    transform: [reactify]
   })
-    .transform("babelify", {presets: ["react"]})
     .bundle()
     .pipe(source(path.MINIFIED_OUT))
-//    .pipe(streamify(uglify()))
+    .pipe(streamify(uglify()))
     .pipe(gulp.dest(path.DEST_BUILD));
 });
 
