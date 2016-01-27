@@ -9,12 +9,15 @@ directly into system environment. [nodeenvwrapper](https://github.com/hanshoi/no
 ```
 pip install nodeenv
 git clone git@github.com:hanshoi/nodeenvwrapper.git $HOME/.nodeenvs
-echo "export NODEENV_HOME=$HOME/.nodeenvs\nsource $HOME/.nodeenvs/nodeenvwrapper.sh" >> $HOME/.bashrc
+echo "export NODEENV_HOME=$HOME/.nodeenvs"  >> $HOME/.bashrc
+echo "source $HOME/.nodeenvs/nodeenvwrapper.sh" >> $HOME/.bashrc
 ```
 
 nodeenv or nodeenvwrapper isn't needed for these examples to work, just a friendly advice.
 
 ## Examples
+Plenty of examples have been included into the examples folders to demonstrate different parts of react and building of react and its other parts. This is not a tutorial however so all things have not been explained in a proper fashion, so bear with me.
+
 #### Helloworld
 A basic printing of "Hello World!" into html. This illustrates the installing of all necessary items by using npm, nodeenv and browserify.
 

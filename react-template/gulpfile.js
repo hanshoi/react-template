@@ -1,34 +1,75 @@
-var browserify = require('browserify'),
-    watchify = require('watchify'),
-    gulp = require('gulp'),
-    source = require('vinyl-source-stream'),
-    react = require('react'),
-    reactDOM = require('react-dom'),
-    sourceFile = './main.js',
-    destFolder = './',
-    destFile = 'bundle.js';
+var gulp = require('gulp');
+var uglify = require('gulp-uglify');
+var htmlreplace = require('gulp-html-replace');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var reactify = require('reactify');
+var streamify = require('gulp-streamify');
 
-gulp.task('browserify', function() {
-  return browserify(sourceFile, {
-    cache: {},
-    packageCache: {},
-  })
-  .bundle()
-  .pipe(source(destFile))
-  .pipe(gulp.dest(destFolder));
+var path = {
+  HTML: 'src/index.html',
+  MINIFIED_OUT: 'build.min.js',
+  OUT: 'build.js',
+  DEST_SRC: 'dist/src/js',
+  DEST_BUILD: 'dist/build',
+  DEST: 'dist',
+  ENTRYPOINT: './src/js/app.js'
+};
+
+
+// copy html into build folder
+gulp.task('copy', function(){
+  gulp.src(path.HTML)
+    .pipe(gulp.dest(path.DEST));
 });
 
+// main development task
 gulp.task('watch', function() {
-  var bundler = watchify(sourceFile);
-  bundler.on('update', rebundle);
+  gulp.watch(path.HTML, ['copy']);
 
+  var b  = watchify(browserify({
+    entries: [path.ENTRYPOINT],
+    transform: [reactify],
+    debug: true,
+    cache: {}, packageCache: {}, fullPaths: true
+  }));
+  
   function rebundle() {
-    return bundler.bundle()
-      .pipe(source(destFile))
-      .pipe(gulp.dest(destFolder));
-  }
+    return b.bundle()
+      .pipe(source(path.OUT))
+      .pipe(gulp.dest(path.DEST_SRC))
+  };
 
+
+  b.on('update', rebundle);
   return rebundle();
 });
 
-gulp.task('default', ['browserify', 'watch']);
+// default task
+gulp.task('default', ['copy', 'watch']);
+
+//PRODUCTION
+// build
+gulp.task('build', function(){
+  browserify({
+    entries: [path.ENTRYPOINT],
+    transform: [reactify]
+  })
+    .bundle()
+    .pipe(source(path.MINIFIED_OUT))
+    .pipe(streamify(uglify()))
+    .pipe(gulp.dest(path.DEST_BUILD));
+});
+
+// replace HTML
+gulp.task('replaceHTML', function(){
+  gulp.src(path.HTML)
+    .pipe(htmlreplace({
+      'js': 'build/' + path.MINIFIED_OUT
+    }))
+    .pipe(gulp.dest(path.DEST));
+});
+
+// create the main production task
+gulp.task('production', ['replaceHTML', 'build']);
