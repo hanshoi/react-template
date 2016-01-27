@@ -1,0 +1,11 @@
+{
+  "name": "react-template",
+  "version": "0.0.1",
+  "description": "A template project that has a simple working project structure for react applications.",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hanshoi/react-template.git"
+  },
+  "author": "Antti Ruotsalainen",
+  "license": "MIT"
+}
