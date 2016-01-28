@@ -11,7 +11,7 @@ var path = {
   HTML: 'src/index.html',
   MINIFIED_OUT: 'build.min.js',
   OUT: 'build.js',
-  DEST_SRC: 'dist/src/js',
+  DEST_SRC: 'dist/js',
   DEST_BUILD: 'dist/build',
   DEST: 'dist',
   ENTRYPOINT: './src/js/app.js'
