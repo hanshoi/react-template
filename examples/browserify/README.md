@@ -14,3 +14,6 @@ We are using babelify to change JSX to JS code.
 gulp copy  # copies .html into dist build-folder
 gulp build  # creates a build.js file into dist/js folder from all our .js files
 ```
+
+## References
+* [browsify-handbook](https://github.com/substack/browserify-handbook)

@@ -4,7 +4,7 @@ var htmlreplace = require('gulp-html-replace');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('reactify');
+var reactify = require('reactify');  // using reactify for jsx->js conversions
 var streamify = require('gulp-streamify');
 
 var path = {
@@ -26,24 +26,26 @@ gulp.task('copy', function(){
 
 // main development task
 gulp.task('watch', function() {
-  gulp.watch(path.HTML, ['copy']);
+  gulp.watch(path.HTML, ['copy']);  // watch .html and run task copy on change
 
+  // create a watcher for .js files by wrapping browserify with watchify
   var b  = watchify(browserify({
     entries: [path.ENTRYPOINT],
-    transform: [reactify],
+    transform: [reactify],   // reactify plugin for jsx->js transformation
     debug: true,
-    cache: {}, packageCache: {}, fullPaths: true
+    cache: {}, packageCache: {}, fullPaths: true  // don't ask, just needed for watchify
   }));
   
+  // basic bundling function. Bundle all files together and put them in build.js in dist/js
   function rebundle() {
-    return b.bundle()
+    return b.bundle()  
       .pipe(source(path.OUT))
       .pipe(gulp.dest(path.DEST_SRC))
   };
 
-
-  b.on('update', rebundle);
-  return rebundle();
+  // on update run rebundle()
+  rebundle();  // run rebundle when executing this command.
+  return b.on('update', rebundle);
 });
 
 // default task
