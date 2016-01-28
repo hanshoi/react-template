@@ -3,11 +3,11 @@ var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
+var debug = require('gulp-debug')
 
 var path = {
   HTML: 'index.html',
   OUT: 'build.js',
-  DEST_SRC: 'dist/js',
   DEST: 'dist',
   ENTRYPOINT: './app.js'
 };
@@ -26,6 +26,7 @@ function getWatcher() {
 // copy html into build folder
 gulp.task('copy', function(){
   gulp.src(path.HTML)
+    .pipe(debug({title: "copy:"}))
     .pipe(gulp.dest(path.DEST));
 });
 
@@ -36,9 +37,10 @@ gulp.task('watch', function() {
   var watcher = getWatcher();
 
   function rebundle() {
-    return watcher.bundle()  
+    watcher.bundle()
       .pipe(source(path.OUT))
-      .pipe(gulp.dest(path.DEST_SRC))
+      .pipe(gulp.dest(path.DEST));
+    console.log("Updated JSX files.");
   };
 
   rebundle();
