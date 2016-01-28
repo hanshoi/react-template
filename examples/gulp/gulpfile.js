@@ -1,17 +1,17 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
+var gulp = require('gulp');  // gulp, a task handler
+var concat = require('gulp-concat');  // js file joiner library
+var uglify = require('gulp-uglify');  // js minifyer library
 var react = require('gulp-react');
-var htmlreplace = require('gulp-html-replace');
+var htmlreplace = require('gulp-html-replace');  // library for replacing html content in files from gulp
 
 var path = {
-  HTML: 'main.html',
-  ALL: ['js/*.js', 'js/**/*.js', 'main.html'],
-  JS: ['js/child.js', 'js/parent.js', 'js/*.js', 'js/**/*.js'],
-  MINIFIED_OUT: 'build.min.js',
-  DEST_SRC: 'dist/js',
-  DEST_BUILD: 'dist/build',
-  DEST: 'dist'
+  HTML: 'main.html',  // path to .html file
+  ALL: ['js/*.js', 'js/**/*.js', 'main.html'],  // path to all files to be watched
+  JS: ['js/child.js', 'js/parent.js', 'js/*.js', 'js/**/*.js'],  // all JS files to be watched. NOTE: order does matter.
+  MINIFIED_OUT: 'build.min.js',  // name of minified .js file
+  DEST_SRC: 'dist/js',  // destination folder for built .js files
+  DEST_BUILD: 'dist/build',  // destination folder for production built (minified) .js files
+  DEST: 'dist'  // our build folder
 };
 
 

@@ -5,8 +5,14 @@
     <title>Browserify & Gulp Rocks!</title>
   </head>
   <body>
+    <!-- A tag for application content rendered by react. -->
     <div id="app"></div>
+    <!-- reference url for react for speedier loading for the client -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.min.js"></script>
+    
+    <!-- 
+    build:js tags are for gulp-html-replace to find the 'build' part of this file for replacing with the production version of the scripts (build.min.js).
+    -->
 
     <!-- build:js -->
     <script src="js/child.js"></script>
