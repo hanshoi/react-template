@@ -5,7 +5,6 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
 var notify = require('gulp-notify');
-var babelify = require('babelify');
 
 var path = {
   HTML: 'index.html',
@@ -48,8 +47,7 @@ gulp.task('watch', function() {
   var watcher = getWatcher();
 
   function rebundle() {
-    watcher.transform(babelify, {presets: ["react"]})
-      .bundle()
+    watcher.bundle()
       .on('error', handleErrors)
       .pipe(source(path.OUT))
       .pipe(gulp.dest(path.DEST));
