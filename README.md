@@ -8,9 +8,9 @@ Plenty of examples have been included into the examples folders to demonstrate d
 Number|Name|Description
 ------|----|-----------
 01|[Helloworld](https://github.com/hanshoi/react-template/tree/master/examples/helloworld)|A basic printing of "Hello World!" into html. This illustrates the installing of all necessary items by using npm and browserify.
-02|([gulp](https://github.com/hanshoi/react-template/tree/master/examples/gulp)|A basic implementation using react with gulp
+02|[gulp](https://github.com/hanshoi/react-template/tree/master/examples/gulp)|A basic implementation using react with gulp
 03|[browserify](https://github.com/hanshoi/react-template/tree/master/examples/browserify)|Using gulp, browserify and react.
-04|[watchify]https://github.com/hanshoi/react-template/tree/master/examples/watchify)|Adding watchify into combination with browserify, gulp and react.
+04|[watchify](https://github.com/hanshoi/react-template/tree/master/examples/watchify)|Adding watchify into combination with browserify, gulp and react.
 
 
 ## nodeenv (optional)
