@@ -25,5 +25,11 @@ A basic printing of "Hello World!" into html. This illustrates the installing of
 2. install all necessary items `make install`
 3. run web page with `make run`
 
-#### Gulp & Browserify
-Implementation variation of the [Tyler McGinnes tutorial on gulp and browserify](http://tylermcginnis.com/reactjs-tutorial-pt-2-building-react-applications-with-gulp-and-browserify/).
+ #### gulp
+ A basic implementation using react with gulp
+ 
+ #### browserify
+ Using gulp, browserify and react.
+ 
+ #### watchify
+ Adding watchify into combination with browserify, gulp and react.
