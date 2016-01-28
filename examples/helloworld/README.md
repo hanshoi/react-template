@@ -5,7 +5,7 @@ We are running our commands from commandline accompanied by the simplest of exam
 `cd examples/helloworld`
 
 ## Install
-We need node package manager to do anything with commonjs (Node's JS standard), hence we need to [install it](https://nodejs.org).
+We need node package manager to do anything with commonjs (Node's JS standard), hence we need to [install it](https://docs.npmjs.com/getting-started/installing-node).
 
 We also use browserify to convert commonjs into ordinary js and bundle react into it. Babelify will do converting of JSX format into javascript format. So lets do that now.
 
@@ -26,3 +26,9 @@ For the lazies you can use makefile for running all the above. Like this.
 ```bash
 make
 ```
+
+
+## References
+* [browserify](http://browserify.org/)
+* [babelify](https://github.com/babel/babelify)
+* [React: Getting Started](https://facebook.github.io/react/docs/getting-started.html)
