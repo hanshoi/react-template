@@ -8,7 +8,7 @@ var path = {
   OUT: 'build.js',
   DEST_SRC: 'dist/js',
   DEST: 'dist',
-  ENTRYPOINT: './js/app.js'
+  ENTRYPOINT: './js/app.js'  // initial file for our react code. Browsify uses this for checking requirements for additional files.
 };
 
 
@@ -20,12 +20,13 @@ gulp.task('copy', function(){
 
 // build
 gulp.task('build', function(){
+  // init browserify with .jsx file
   browserify({
     entries: [path.ENTRYPOINT],
     debug: true
   })
-    .transform(babelify, {presets: ["react"]})
-    .bundle()
+    .transform(babelify, {presets: ["react"]})  // use babelify to JSX->JS transformation
+    .bundle()  // create a js bundle from commonjs
     .pipe(source(path.OUT))
     .pipe(gulp.dest(path.DEST_SRC));
 });

@@ -1,3 +1,6 @@
+/*
+  Export our child component to enable its usage from outside ths commonjs module.
+*/
 var Child = React.createClass({
   render: function(){
     return (
