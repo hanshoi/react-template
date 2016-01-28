@@ -1,11 +1,20 @@
 <!DOCTYPE html>
+<!-- 
+Here we create a basic minimalistic .html page to convey exactly what we want without anything extra.
+-->
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Hello React!</title>
   </head>
   <body>
+    <!-- Create a div tag for adding the React code here. -->
     <div id="example"></div>
+    <!-- 
+    Reference the bundle.js for enabling and executing React code.
+    You may notice that this file doesn't actually exist. No problem, our 
+    'build' command will create it using browserify and babelify.
+    -->
     <script src="bundle.js"></script>
   </body>
 </html>
