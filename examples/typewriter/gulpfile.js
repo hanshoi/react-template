@@ -1,15 +1,16 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
-var debug = require('gulp-debug')
+var notify = require('gulp-notify');
 
 var path = {
   HTML: 'index.html',
   OUT: 'build.js',
   DEST: 'dist',
-  ENTRYPOINT: './app.js'
+  ENTRYPOINT: './app.jsx'
 };
 
 // create a watcher for .js files by wrapping browserify with watchify
@@ -23,13 +24,22 @@ function getWatcher() {
 };
 
 
+// handle browserify errors
+function handleErrors() {
+  var args = Array.prototype.slice.call(arguments);
+  notify.onError({
+    title: 'Compile Error',
+    message: '<%= error.message %>'
+  }).apply(this, args);
+  this.emit('end'); // Keep gulp from hanging on this task
+}
+
+
 // copy html into build folder
 gulp.task('copy', function(){
   gulp.src(path.HTML)
-    .pipe(debug({title: "copy:"}))
     .pipe(gulp.dest(path.DEST));
 });
-
 
 // main development task
 gulp.task('watch', function() {
@@ -38,9 +48,10 @@ gulp.task('watch', function() {
 
   function rebundle() {
     watcher.bundle()
+      .on('error', handleErrors)
       .pipe(source(path.OUT))
       .pipe(gulp.dest(path.DEST));
-    console.log("Updated JSX files.");
+    gutil.log("Rebundle...");
   };
 
   rebundle();
