@@ -3,12 +3,12 @@ var ReactDOM = require("react-dom");
 
 
 var Typewriter = React.createClass({
-  getInitialState: function() {
+  getInitialState: function(){
     return {
-      username: "hanshoi"
+      username: 'hanshoi'
     };
   },
-  handleChange: function(e) {
+  handleChange: function(e){
     this.setState({
       username: e.target.value
     });
@@ -16,12 +16,14 @@ var Typewriter = React.createClass({
   render: function(){
     return (
       <div>
-        <p>Hello {this.state.username}</p>
-        Change name: <input type="text" value={value.state.username} onChange={this.handleChange} />
+        Hello {this.state.username} <br />
+        Change Name: <input type="text" value={this.state.username} onChange={this.handleChange} />
       </div>
-    )
+    );
   }
 });
 
-
-ReactDOM.render(<Typewriter />, document.getElementById('app'));
+ReactDOM.render(
+  <Typewriter />,
+  document.getElementById('app')
+);
