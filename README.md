@@ -5,12 +5,9 @@ A easy project template for creating react applications.
 ## Examples
 Plenty of examples have been included into the examples folders to demonstrate different parts of react and building of react and its other parts. This is not a tutorial however so all things have not been explained in a proper fashion, so bear with me.
 
-#### [Helloworld](https://github.com/hanshoi/react-template/tree/master/examples/helloworld/README.md)
-A basic printing of "Hello World!" into html. This illustrates the installing of all necessary items by using npm, nodeenv and browserify.
-
-1. go to dir `cd examples/helloworld`
-2. install all necessary items `make install`
-3. run web page with `make run`
+Number|Name|Description
+------|----|-----------
+01|[Helloworld](https://github.com/hanshoi/react-template/tree/master/examples/helloworld/README.md)|A basic printing of "Hello World!" into html. This illustrates the installing of all necessary items by using npm and browserify.
 
 #### gulp
 A basic implementation using react with gulp
