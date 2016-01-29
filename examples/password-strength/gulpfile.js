@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var notify = require('gulp-notify');
 
 var path = {
@@ -17,7 +17,6 @@ var path = {
 function getWatcher() {
   return watchify(browserify({
     entries: [path.ENTRYPOINT],
-    transform: [reactify],
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
   }));
@@ -47,7 +46,8 @@ gulp.task('watch', function() {
   var watcher = getWatcher();
 
   function rebundle() {
-    watcher.bundle()
+    watcher.transform(babelify, {presets: ["react", "es2015"]})
+      .bundle()
       .on('error', handleErrors)
       .pipe(source(path.OUT))
       .pipe(gulp.dest(path.DEST));
