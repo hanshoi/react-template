@@ -7,10 +7,10 @@ var reactify = require('reactify');
 var notify = require('gulp-notify');
 
 var path = {
-  HTML: 'index.html',
+  HTML: 'src/index.html',
   OUT: 'build.js',
   DEST: 'dist',
-  ENTRYPOINT: './app.js'
+  ENTRYPOINT: './src/js/app.js'
 };
 
 // create a watcher for .js files by wrapping browserify with watchify

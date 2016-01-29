@@ -1,5 +1,5 @@
-# Friends
-A simple typewriter application that shows reacts basic features. 
+# Password Strength Page 
+Example of react, react-bootstrap, classnames and how to use reacts dynamic features to check a good password strenght.
 
 
 ## Install
