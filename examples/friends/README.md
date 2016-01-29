@@ -1,4 +1,4 @@
-# Typewriter
+# Friends
 A simple typewriter application that shows reacts basic features. 
 
 We are also show casing the gulp-debug. With it you can check what passes in gulp-stream by printing it on the commandline.
