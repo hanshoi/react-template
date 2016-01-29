@@ -10,7 +10,7 @@ var path = {
   HTML: 'index.html',
   OUT: 'build.js',
   DEST: 'dist',
-  ENTRYPOINT: './app.jsx'
+  ENTRYPOINT: './app.js'
 };
 
 // create a watcher for .js files by wrapping browserify with watchify
