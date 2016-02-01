@@ -3,7 +3,7 @@ install:
 	pip install -r requirements.txt
 
 build:
-	gulp build
+	gulp
 
 run:
 	python application/app.py
