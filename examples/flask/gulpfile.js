@@ -38,7 +38,8 @@ function handleErrors() {
 // copy html into build folder
 gulp.task('copy', function(){
   gulp.src(path.HTML)
-    .pipe(gulp.dest(path.DEST));
+    .pipe(gulp.dest(path.DEST))
+    .pipe(size());
 });
 
 // main development task
@@ -50,7 +51,8 @@ gulp.task('watch', function() {
     watcher.bundle()
       .on('error', handleErrors)
       .pipe(source(path.OUT))
-      .pipe(gulp.dest(path.DEST));
+      .pipe(gulp.dest(path.DEST))
+      .pipe(size());
     gutil.log("Rebundle...");
   };
 
