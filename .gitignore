@@ -5,3 +5,4 @@ bundle.js
 .env
 *.log
 dist/
+bower_components

@@ -11,7 +11,13 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "./application/static/bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "react": "^0.14.7",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.0"
+  }
 }
