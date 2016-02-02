@@ -1,0 +1,22 @@
+{
+  "name": "bower-sass-example",
+  "version": "0.0.1",
+  "description": "Example of bower and sass with react.",
+  "author": "Antti Ruotsalainen",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
+  },
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-size": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}

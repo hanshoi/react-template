@@ -1,0 +1,17 @@
+{
+  "name": "bower-sass-example",
+  "version": "0.0.1",
+  "description": "Example of bower and sass with react.",
+  "authors": [
+    "Antti Ruotsalainen"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/hanshoi/react-template",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
