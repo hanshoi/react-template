@@ -1,7 +1,7 @@
 {
-  "name": "bower-sass-example",
+  "name": "react-template",
   "version": "0.0.1",
-  "description": "Example of bower and sass with react.",
+  "description": "very long description",
   "authors": [
     "Antti Ruotsalainen"
   ],
@@ -17,7 +17,5 @@
   ],
   "dependencies": {
     "react": "^0.14.7",
-    "bootstrap": "^3.3.6",
-    "jquery": "^2.2.0"
   }
 }
