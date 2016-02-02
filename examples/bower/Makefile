@@ -9,4 +9,7 @@ build:
 run:
 	python application/app.py
 
+production:
+	gulp production
+
 .PHONY: [install, build, run]
