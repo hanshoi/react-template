@@ -1,75 +1,127 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var htmlreplace = require('gulp-html-replace');
+var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
+var notify = require('gulp-notify');
+var sass = require('gulp-sass');
+var size = require('gulp-size');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
+var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
+var htmlreplace = require('gulp-html-replace');
 
 var path = {
-  HTML: 'src/index.html',
-  MINIFIED_OUT: 'build.min.js',
   OUT: 'build.js',
-  DEST_SRC: 'dist/js',
-  DEST_BUILD: 'dist/build',
-  DEST: 'dist',
-  ENTRYPOINT: './src/js/app.js'
+  MINIFIED_OUT: 'build.min.js',
+  HTML: 'application/templates/index.html',
+  HTML_FOLDER: 'application/templates/',
+  DEST: 'application/static/scripts/js/',
+  ENTRYPOINT: './application/static/scripts/jsx/app.js',
+  SCSS_FOLDER: './application/static/stylesheets/scss/*.scss',
+  CSS_FOLDER: './application/static/stylesheets/css/'
+};
+
+var sassOptions = {
+  errLogToConsole: true,
+  outputStyle: 'expanded'
+};
+
+var autoprefixerOptions = {
+  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
 };
 
 
-// copy html into build folder
-gulp.task('copy', function(){
-  gulp.src(path.HTML)
-    .pipe(gulp.dest(path.DEST));
-});
-
-// main development task
-gulp.task('watch', function() {
-  gulp.watch(path.HTML, ['copy']);
-
-  var b  = watchify(browserify({
+// create a watcher for .js files by wrapping browserify with watchify
+function getBrowserify() {
+  return watchify(browserify({
     entries: [path.ENTRYPOINT],
     transform: [reactify],
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
   }));
-  
+}
+
+
+// handle browserify errors
+function handleErrors() {
+  var args = Array.prototype.slice.call(arguments);
+  notify.onError({
+    title: 'Compile Error',
+    message: '<%= error.message %>'
+  }).apply(this, args);
+  this.emit('end'); // Keep gulp from hanging on this task
+}
+
+
+// sass compiling
+gulp.task('styles', function() {
+  gulp.src(path.SCSS_FOLDER)
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions).on('error', sass.logError))
+    .pipe(sourcemaps.write())
+    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(gulp.dest(path.CSS_FOLDER))
+    .pipe(size());
+});
+
+
+// main development task
+gulp.task('watch', function() {
+  gulp.watch(path.SCSS, ['styles'])
+    .on('change', function(event) {
+      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+
+  var watcher = watchify(getBrowserify());
+
   function rebundle() {
-    return b.bundle()
+    watcher.bundle()
+      .on('error', handleErrors)
       .pipe(source(path.OUT))
-      .pipe(gulp.dest(path.DEST_SRC))
-  };
+      .pipe(gulp.dest(path.DEST))
+      .pipe(size());
+    gutil.log("Rebundle...");
+  }
 
-
-  b.on('update', rebundle);
-  return rebundle();
+  rebundle();
+  return watcher.on('update', rebundle);
 });
 
-// default task
-gulp.task('default', ['copy', 'watch']);
-
-//PRODUCTION
-// build
-gulp.task('build', function(){
-  browserify({
-    entries: [path.ENTRYPOINT],
-    transform: [reactify]
-  })
-    .bundle()
-    .pipe(source(path.MINIFIED_OUT))
-    .pipe(streamify(uglify()))
-    .pipe(gulp.dest(path.DEST_BUILD));
-});
 
 // replace HTML
 gulp.task('replaceHTML', function(){
   gulp.src(path.HTML)
     .pipe(htmlreplace({
-      'js': 'build/' + path.MINIFIED_OUT
+      'js': 'scripts/js/' + path.MINIFIED_OUT
     }))
-    .pipe(gulp.dest(path.DEST));
+    .pipe(gulp.dest(path.HTML_FOLDER));
 });
 
-// create the main production task
+
+// build for production task
+gulp.task('build', function(){
+  // sass
+  gulp.src(path.SCSS_FOLDER)
+    .pipe(sass({outputStyle: "compressed"}))
+    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(gulp.dest(path.CSS_FOLDER))
+    .pipe(size());
+
+  // js
+  getBrowserify().bundle()
+    .pipe(source(path.MINIFIED_OUT))
+    .pipe(streamify(uglify()))
+    .pipe(gulp.dest(path.DEST))
+    .pipe(size());
+
+  gutil.log("Production bundle created");
+});
+
+// production task
 gulp.task('production', ['replaceHTML', 'build']);
+
+// default task
+gulp.task('default', ['styles', 'watch']);

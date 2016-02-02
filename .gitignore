@@ -6,3 +6,5 @@ bundle.js
 *.log
 dist/
 bower_components
+**/scripts/js
+**/stylesheets/css
