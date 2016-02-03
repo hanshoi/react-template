@@ -2,8 +2,22 @@
 var DynamicSearch = React.createClass ({
   getInitialState: function(){
     return {
-      searchString: ''
+      searchString: '',
+      url: '',
+      countries: []
     }
+  },
+  componentDidMount: function() {
+    // request countries information from server when component has mounted
+    this.serverRequest = $.get($ROOT_URL + this.props.url, function(data){
+      if ( data.countries != undefined ) {
+        this.setState({countries: data.countries});
+      }
+    }.bind(this), "json");
+  },
+  componentWillUnmount: function(){
+    // abort all ongoing ajax calls as not needed
+    this.serverRequest.abort();
   },
   handleUpdate: function(event) {
     this.setState({
@@ -12,7 +26,7 @@ var DynamicSearch = React.createClass ({
     console.log("Updated countries list.")
   },
   render: function() {
-    var countries = this.props.items;
+    var countries = this.state.countries;
     var searchString = this.state.searchString.trim().toLowerCase();
 
     if(searchString.length > 0){
@@ -32,19 +46,8 @@ var DynamicSearch = React.createClass ({
   }
 });
 
-// list of countries, defined with JavaScript object literals
-var countries = [
-  {"name": "Sweden"}, {"name": "China"}, {"name": "Peru"}, {"name": "Czech Republic"},
-  {"name": "Bolivia"}, {"name": "Latvia"}, {"name": "Samoa"}, {"name": "Armenia"},
-  {"name": "Greenland"}, {"name": "Cuba"}, {"name": "Western Sahara"}, {"name": "Ethiopia"},
-  {"name": "Malaysia"}, {"name": "Argentina"}, {"name": "Uganda"}, {"name": "Chile"},
-  {"name": "Aruba"}, {"name": "Japan"}, {"name": "Trinidad and Tobago"}, {"name": "Italy"},
-  {"name": "Cambodia"}, {"name": "Iceland"}, {"name": "Dominican Republic"}, {"name": "Turkey"},
-  {"name": "Spain"}, {"name": "Poland"}, {"name": "Haiti"}
-];
-
 
 ReactDOM.render(
-  <DynamicSearch items={countries} />,
+  <DynamicSearch url='/api/countries' />,
   document.getElementById('content')
 );

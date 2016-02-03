@@ -1,6 +1,8 @@
 # Bower-Sass
 Example of using bower and SASS with react, also bootstrap added as a novelty.
 
+We are also using AJAX for getting countries list from server after component did mount.
+
 ## Install
 Install all required stuff for js and python by using make file.
 `make install`
