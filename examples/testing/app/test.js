@@ -1,8 +1,13 @@
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 var DynamicSearch = require('./dynamicsearch.js');
 
 describe('DynamicSearch', function() {
-  console.log("testing");
+
+  it("passing test", function() {
+    console.log("some test");
+  });
+
 });

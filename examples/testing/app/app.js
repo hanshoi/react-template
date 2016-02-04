@@ -1,5 +1,6 @@
-var DynamicSearch = require('./dynamicsearch.js');
 var React = require('react');
+var ReactDOM = require('react-dom');
+var DynamicSearch = require('./dynamicsearch.js');
 
 var App = React.createClass({
   getInitialState: function(){
@@ -13,10 +14,13 @@ var App = React.createClass({
         {"name": "Cambodia"}, {"name": "Iceland"}, {"name": "Dominican Republic"}, {"name": "Turkey"},
         {"name": "Spain"}, {"name": "Poland"}, {"name": "Haiti"}
       ]
-    }
+    };
   },
   render: function(){
-    return <DynamicSearch countries={this.state.countries} />
+    var countries = this.state.countries;
+    return (
+        <DynamicSearch countries={countries} />
+    );
   }
 });
 

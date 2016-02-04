@@ -1,3 +1,5 @@
+var React = require('react');
+
 var DynamicSearch = React.createClass ({
   getInitialState: function(){
     return {
@@ -38,4 +40,4 @@ var DynamicSearch = React.createClass ({
   }
 });
 
-module.export = DynamicSearch;
+module.exports = DynamicSearch;

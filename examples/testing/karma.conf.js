@@ -3,10 +3,10 @@ module.exports = function(config)
   config.set({
     basePath: '',
     frameworks: ['browserify', 'mocha'],
-    files: ['app/*.js'],
-    exclude: [],
+    files: ['app/test.js'],
+    exclude: ['app/build.js'],
     preprocessors: {
-      'app/*.js': ['browserify']
+      'app/test.js': ['browserify']
     },
     reporters: ['progress'],
     port: 9876,

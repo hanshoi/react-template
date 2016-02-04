@@ -6,11 +6,13 @@ var watchify = require('watchify');
 var reactify = require('reactify');
 var notify = require('gulp-notify');
 var size = require('gulp-size');
+var karmaServer = require('karma').Server;
 
 var path = {
   OUT: 'build.js',
   DEST: 'app',
   ENTRYPOINT: './app/app.js',
+  KARMA_CONF: '/karma.conf.js'
 };
 
 
@@ -20,6 +22,7 @@ function getBrowserify() {
     entries: [path.ENTRYPOINT],
     transform: [reactify],
     debug: true,
+    bundleExternal: false,    // prevent bundling vendor packages (react, react-dom)
     cache: {}, packageCache: {}, fullPaths: true
   }));
 }
@@ -52,6 +55,23 @@ gulp.task('watch', function() {
   rebundle();
   return watcher.on('update', rebundle);
 });
+
+
+// run tests once and exit
+gulp.task('test', function (done) {
+  new karmaServer({
+    configFile: __dirname + path.KARMA_CONF,
+    singleRun: true
+  }, done()).start();
+});
+
+// run tests once and watch for changes
+gulp.task('tdd', function (done) {
+  new karmaServer({
+    configFile: __dirname + path.KARMA_CONF,
+  }, done()).start();
+});
+
 
 // default task
 gulp.task('default', ['watch']);
