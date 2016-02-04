@@ -6,8 +6,15 @@ var DynamicSearch = require('./dynamicsearch.js');
 
 describe('DynamicSearch', function() {
 
-  it("passing test", function() {
-    console.log("some test");
+  it("search field starts empty", function() {
+    var dynamicsearch = TestUtils.renderIntoDocument(
+        <DynamicSearch countries={[]} />
+    );
+
+    var h1 = TestUtils.findRenderedDOMComponentWithTag(dynamicsearch, 'input');
+
+    expect(h1.value).toEqual("");
+
   });
 
 });
