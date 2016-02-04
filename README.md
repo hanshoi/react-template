@@ -14,6 +14,7 @@ Number|Name|Description
 05|[react](https://github.com/hanshoi/react-template/tree/master/examples/react)|A simple friends application that shows reacts basic features.
 06|[flask](https://github.com/hanshoi/react-template/tree/master/examples/flask)|Example of using flask with react.
 07|[bower-sass](https://github.com/hanshoi/react-template/tree/master/examples/bower-sass)|Example of using bower and SASS with react, also bootstrap added as a novelty.
+08|[testing](https://github.com/hanshoi/react-template/tree/master/examples/testing)|Testing react and server side code
 
 ## nodeenv (optional)
 [nodeenv](https://github.com/ekalinin/nodeenv) is like virtualenv in python and enables you to install certain versions of software in a virtual environment and not
