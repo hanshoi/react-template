@@ -9,13 +9,12 @@ describe('Integration Tests', function() {
 
   it("search field starts empty", function() {
     var dynamicsearch = TestUtils.renderIntoDocument(
-        <DynamicSearch countries={[]} />
+        <DynamicSearch countries={[{"name": "Cuba"}]} />
     );
 
     var h1 = TestUtils.findRenderedDOMComponentWithTag(dynamicsearch, 'input');
 
     expect(h1.value).toEqual("");
-
   });
 
 });
@@ -23,14 +22,16 @@ describe('Integration Tests', function() {
 
 describe('Unit Tests', function() {
 
+  before("get prototype class of DynamicSearch", function(){
+    this.ds = DynamicSearch.prototype;
+  });
+
   it("is a react composite component", function() {
-    debugger;
-    expect(TestUtils.isCompositeComponent(DynamicSearch)).toExist();
+    expect(TestUtils.isCompositeComponent(this.ds)).toExist();
   });
   
   it("call DynamicSearch field", function() {
-    debugger;
-    expect(DynamicSearch.getInitialState()).toEqual({searchString: ''});
+    expect(this.ds.getInitialState()).toEqual({searchString: ''});
   });
 
 });
