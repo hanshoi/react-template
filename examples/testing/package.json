@@ -21,6 +21,7 @@
     "gulp-livereload": "^3.8.1",
     "gulp-notify": "^2.2.0",
     "gulp-size": "^2.0.0",
+    "gulp-spawn-mocha": "^2.2.2",
     "gulp-util": "^3.0.7",
     "jsdom": "^8.0.2",
     "livereload": "^0.4.1",

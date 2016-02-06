@@ -8,6 +8,7 @@ var babelify = require('babelify');
 var notify = require('gulp-notify');
 var size = require('gulp-size');
 var livereload = require('gulp-livereload');
+var mocha = require('gulp-spawn-mocha');
 var conf = require('./package.json');
 
 
@@ -52,6 +53,22 @@ gulp.task('watch', function() {
   app_bundler.on('update', rebundleApp);
 });
 
+
+gulp.task('test', function () {
+  return gulp.src([conf.vars.test_files], {read: false})
+    .pipe(mocha({
+      debug: true,
+      compilers: "js:babel-register",
+      r: './app/test/setup.js',
+      R: 'nyan'
+    }));
+});
+
+
+gulp.task('tdd', ['test'], function() {
+  gulp.watch(conf.vars.test_files, ['test']);
+  gulp.watch(conf.vars.build_folder + "/" + conf.vars.app_bundle, ['test']);
+});
 
 // default task
 gulp.task('default', ['watch']);
