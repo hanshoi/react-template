@@ -18,3 +18,11 @@ describe('DynamicSearch', function() {
   });
 
 });
+
+describe('App', function() {
+  
+  it("call DynamicSearch field", function() {
+    console.log("some random shit");
+  });
+
+});

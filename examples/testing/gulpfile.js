@@ -69,6 +69,7 @@ gulp.task('test', function (done) {
 gulp.task('tdd', function (done) {
   new karmaServer({
     configFile: __dirname + path.KARMA_CONF,
+    singleRun: false
   }, done()).start();
 });
 

@@ -16,6 +16,7 @@ var App = React.createClass({
       ]
     };
   },
+
   render: function(){
     var countries = this.state.countries;
     return (
