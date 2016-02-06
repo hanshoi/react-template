@@ -1,23 +1,17 @@
 # Testing
 Example of testing React.
 
-We are using mocha test suite for describing tests and karma test runner to execute them.
+We are using mocha test suite for describing and running tests.
 
 We are also incorporating livereload to really fast reloading on browser (requires a chrome plugin).
 
-## Install
-Install all required stuff for js and python by using make file.
-`make install`
-
-Otherwise you can install them one by one like this.
-```bash
-npm install
-```
-
 ## Usage
 ```bash
-make build  # build & watch js with gulp
-make run   # run python server
+mocha --debug --compilers js:babel-register --recursive app/test/*
+or
+npm test
+or
+gulp test
 ```
 
 ## References
