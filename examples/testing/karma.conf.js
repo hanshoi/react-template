@@ -13,7 +13,8 @@ module.exports = function(config)
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS'],
+    autoWatchBatchDelay: 5000,   // delay execution of tests for 5s
+    browsers: ['Chrome'],
     browserify: {
       debug: true,
       transform: ["reactify"]

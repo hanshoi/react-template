@@ -4,7 +4,8 @@ var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 var DynamicSearch = require('./dynamicsearch.js');
 
-describe('DynamicSearch', function() {
+
+describe('Integration Tests', function() {
 
   it("search field starts empty", function() {
     var dynamicsearch = TestUtils.renderIntoDocument(
@@ -19,10 +20,16 @@ describe('DynamicSearch', function() {
 
 });
 
-describe('App', function() {
+
+describe('Unit Tests', function() {
+
+  it("is a react composite component", function() {
+    debugger;
+    expect(TestUtils.isCompositeComponent(DynamicSearch)).toExist();
+  });
   
   it("call DynamicSearch field", function() {
-    console.log("some random shit");
+    expect(DynamicSearch.getInitialState()).toEqual({searchString: ''});
   });
 
 });
