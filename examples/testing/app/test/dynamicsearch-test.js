@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
-var DynamicSearch = require('./dynamicsearch.js');
+var DynamicSearch = require('../dynamicsearch.js');
 
 
 describe('Integration Tests', function() {
@@ -29,6 +29,7 @@ describe('Unit Tests', function() {
   });
   
   it("call DynamicSearch field", function() {
+    debugger;
     expect(DynamicSearch.getInitialState()).toEqual({searchString: ''});
   });
 

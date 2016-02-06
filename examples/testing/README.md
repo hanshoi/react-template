@@ -1,6 +1,10 @@
 # Testing
 Example of testing React.
 
+We are using mocha test suite for describing tests and karma test runner to execute them.
+
+We are also incorporating livereload to really fast reloading on browser (requires a chrome plugin).
+
 ## Install
 Install all required stuff for js and python by using make file.
 `make install`
