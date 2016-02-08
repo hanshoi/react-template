@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('babelify');
+var babelify = require('babelify');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
@@ -30,6 +30,7 @@ function getBundler() {
     entries: [conf.vars.app_entrypoint],
     transform: [babelify],
     debug: conf.vars.develop,
+    bundleExternal: false,    // prevent bundling vendor packages (react, react-dom)
     cache: {}, packageCache: {}, fullPaths: true
   }));
 }
@@ -48,11 +49,11 @@ function handleErrors() {
 
 // sass compiling
 gulp.task('styles', function() {
-  gulp.src(conf.var.scss_files)
+  gulp.src(conf.vars.scss_files)
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(sourcemaps.write())
-    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(autoprefixer())
     .pipe(gulp.dest(conf.vars.css_folder))
     .pipe(size());
 });
@@ -65,7 +66,7 @@ gulp.task('watch', function() {
       console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 
-  var watcher = watchify(getBrowserify());
+  var watcher = watchify(getBundler());
 
   function rebundle() {
     watcher.bundle()
@@ -73,7 +74,7 @@ gulp.task('watch', function() {
       .pipe(source(conf.vars.app_bundle))
       .pipe(gulp.dest(conf.vars.build_folder))
       .pipe(size())
-      .livereload();
+      .pipe(livereload());
     gutil.log("Rebundle...");
   }
 
@@ -87,7 +88,7 @@ gulp.task('test', function () {
     .pipe(mocha({
       debug: true,
       compilers: "js:babel-register",
-      r: './app/test/setup.js',
+      r: conf.vars.setup_tests,
       R: 'nyan'
     }));
 });
@@ -116,7 +117,7 @@ gulp.task('build', function(){
   // sass
   gulp.src(conf.vars.scss_files)
     .pipe(sass({outputStyle: "compressed"}))
-    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(autoprefixer())
     .pipe(gulp.dest(conf.vars.css_files))
     .pipe(size());
 

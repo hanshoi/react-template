@@ -5,7 +5,7 @@
   "author": "Antti Ruotsalainen",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --recursive app/test/*"
+    "test": "mocha --compilers js:babel-register --recursive app/**/__test__/*-test.js -r app/static/scripts/jsx/__test__/setup.js"
   },
   "dependencies": {
     "react": "^0.14.6",
@@ -42,10 +42,11 @@
     "develop": true,
     "app_bundle": "build.js",
     "app_bundle_min": "build.min.js",
-    "app_entrypoint": "./app/app.js",
+    "app_entrypoint": "./app/static/scripts/jsx/app.js",
     "template_folder": "app/templates",
     "scss_files": "./app/static/stylesheets/scss/*.scss",
     "css_folder": "./app/static/stylesheets/css/",
-    "test_files": "./app/__test__/*"
+    "test_files": "./app/**/__test__/*-test.js",
+    "setup_tests": "./app/static/scripts/jsx/__test__/setup.js"
   }
 }
