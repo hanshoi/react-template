@@ -4,25 +4,45 @@
   "description": "very long description",
   "author": "Antti Ruotsalainen",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register --recursive app/test/*"
+  },
   "dependencies": {
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
   },
   "devDependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.5.1",
+    "babelify": "^7.2.0",
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
+    "expect": "^1.14.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-html-replace": "^1.5.5",
+    "gulp-livereload": "^3.8.1",
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.1.1",
     "gulp-size": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-spawn-mocha": "^2.2.2",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
-    "reactify": "^1.1.1",
+    "jsdom": "^8.0.2",
+    "mocha": "^2.4.5",
+    "node-inspector": "^0.12.5",
+    "react-addons-test-utils": "^0.14.7",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
+  },
+  "vars": {
+    "build_folder": "app",
+    "develop": true,
+    "app_bundle": "build.js",
+    "app_bundle_min": "build.min.js",
+    "app_entrypoint": "./app/app.js",
+    "test_files": "./app/__test__/*"
   }
 }

@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('reactify');
+var reactify = require('babelify');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
@@ -12,7 +12,11 @@ var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
 var htmlreplace = require('gulp-html-replace');
+var livereload = require('gulp-livereload');
+var mocha = require('gulp-spawn-mocha');
+var conf = require('./package.json');
 
+/*
 var path = {
   OUT: 'build.js',
   MINIFIED_OUT: 'build.min.js',
@@ -23,19 +27,16 @@ var path = {
   SCSS_FOLDER: './application/static/stylesheets/scss/*.scss',
   CSS_FOLDER: './application/static/stylesheets/css/'
 };
+*/
 
 var sassOptions = {
   errLogToConsole: true,
   outputStyle: 'expanded'
 };
 
-var autoprefixerOptions = {
-  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
-};
-
 
 // create a watcher for .js files by wrapping browserify with watchify
-function getBrowserify() {
+function getBundler() {
   return watchify(browserify({
     entries: [path.ENTRYPOINT],
     transform: [reactify],

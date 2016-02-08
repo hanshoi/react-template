@@ -8,3 +8,5 @@ dist/
 bower_components
 **/scripts/js
 **/stylesheets/css
+build.js
+build.min.js

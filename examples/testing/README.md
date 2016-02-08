@@ -21,3 +21,4 @@ gulp test
 * [mocha](https://mochajs.org/#getting-started)
 * [react test utils](https://facebook.github.io/react/docs/test-utils.html)
 * [react integration testing with karma by toptal](http://www.toptal.com/react/how-react-components-make-ui-testing-easy)
+* [testing with jsdom + mocha](http://jaketrent.com/post/testing-react-with-jsdom/)
