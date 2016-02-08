@@ -16,18 +16,7 @@ var livereload = require('gulp-livereload');
 var mocha = require('gulp-spawn-mocha');
 var conf = require('./package.json');
 
-/*
-var path = {
-  OUT: 'build.js',
-  MINIFIED_OUT: 'build.min.js',
-  HTML: 'application/templates/index.html',
-  HTML_FOLDER: 'application/templates/',
-  DEST: 'application/static/scripts/js/',
-  ENTRYPOINT: './application/static/scripts/jsx/app.js',
-  SCSS_FOLDER: './application/static/stylesheets/scss/*.scss',
-  CSS_FOLDER: './application/static/stylesheets/css/'
-};
-*/
+
 
 var sassOptions = {
   errLogToConsole: true,
@@ -38,9 +27,9 @@ var sassOptions = {
 // create a watcher for .js files by wrapping browserify with watchify
 function getBundler() {
   return watchify(browserify({
-    entries: [path.ENTRYPOINT],
-    transform: [reactify],
-    debug: true,
+    entries: [conf.vars.app_entrypoint],
+    transform: [babelify],
+    debug: conf.vars.develop,
     cache: {}, packageCache: {}, fullPaths: true
   }));
 }
@@ -59,19 +48,19 @@ function handleErrors() {
 
 // sass compiling
 gulp.task('styles', function() {
-  gulp.src(path.SCSS_FOLDER)
+  gulp.src(conf.var.scss_files)
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(sourcemaps.write())
     .pipe(autoprefixer(autoprefixerOptions))
-    .pipe(gulp.dest(path.CSS_FOLDER))
+    .pipe(gulp.dest(conf.vars.css_folder))
     .pipe(size());
 });
 
 
 // main development task
 gulp.task('watch', function() {
-  gulp.watch(path.SCSS, ['styles'])
+  gulp.watch(conf.vars.scss_files, ['styles'])
     .on('change', function(event) {
       console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
@@ -81,9 +70,10 @@ gulp.task('watch', function() {
   function rebundle() {
     watcher.bundle()
       .on('error', handleErrors)
-      .pipe(source(path.OUT))
-      .pipe(gulp.dest(path.DEST))
-      .pipe(size());
+      .pipe(source(conf.vars.app_bundle))
+      .pipe(gulp.dest(conf.vars.build_folder))
+      .pipe(size())
+      .livereload();
     gutil.log("Rebundle...");
   }
 
@@ -92,37 +82,56 @@ gulp.task('watch', function() {
 });
 
 
+gulp.task('test', function () {
+  return gulp.src([conf.vars.test_files], {read: false})
+    .pipe(mocha({
+      debug: true,
+      compilers: "js:babel-register",
+      r: './app/test/setup.js',
+      R: 'nyan'
+    }));
+});
+
+
+gulp.task('tdd', ['test'], function() {
+  gulp.watch(conf.vars.test_files, ['test']);
+  gulp.watch(conf.vars.build_folder + "/" + conf.vars.app_bundle, ['test']);
+});
+
+
+
 // replace HTML
+/*
 gulp.task('replaceHTML', function(){
   gulp.src(path.HTML)
     .pipe(htmlreplace({
-      'js': 'scripts/js/' + path.MINIFIED_OUT
+      'js': 'scripts/js/' + conf.vars.app_bundle_min
     }))
     .pipe(gulp.dest(path.HTML_FOLDER));
 });
-
+*/
 
 // build for production task
 gulp.task('build', function(){
   // sass
-  gulp.src(path.SCSS_FOLDER)
+  gulp.src(conf.vars.scss_files)
     .pipe(sass({outputStyle: "compressed"}))
     .pipe(autoprefixer(autoprefixerOptions))
-    .pipe(gulp.dest(path.CSS_FOLDER))
+    .pipe(gulp.dest(conf.vars.css_files))
     .pipe(size());
 
   // js
   getBrowserify().bundle()
-    .pipe(source(path.MINIFIED_OUT))
+    .pipe(source(conf.vars.app_bundle_min))
     .pipe(streamify(uglify()))
-    .pipe(gulp.dest(path.DEST))
+    .pipe(gulp.dest(conf.vars.build_folder))
     .pipe(size());
 
   gutil.log("Production bundle created");
 });
 
 // production task
-gulp.task('production', ['replaceHTML', 'build']);
+gulp.task('production', ['test', 'build']);
 
 // default task
 gulp.task('default', ['styles', 'watch']);
