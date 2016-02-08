@@ -5,7 +5,7 @@
   "author": "Antti Ruotsalainen",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --recursive app/**/__test__/*-test.js -r app/static/scripts/jsx/__test__/setup.js"
+    "test": "mocha -r app/static/scripts/jsx/test/setup.js --compilers js:babel-register --recursive app/**/test/*-test.js"
   },
   "dependencies": {
     "react": "^0.14.6",

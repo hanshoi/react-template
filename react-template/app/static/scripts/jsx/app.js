@@ -10,8 +10,9 @@ var Helloworld = React.createClass({
   }
 });
 
-
 ReactDOM.render(
   <Helloworld name="World" />,
   document.getElementById('content')
 );
+
+module.exports = Helloworld;
