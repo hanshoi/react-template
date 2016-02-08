@@ -43,6 +43,9 @@
     "app_bundle": "build.js",
     "app_bundle_min": "build.min.js",
     "app_entrypoint": "./app/app.js",
+    "template_folder": "app/templates",
+    "scss_files": "./app/static/stylesheets/scss/*.scss",
+    "css_folder": "./app/static/stylesheets/css/",
     "test_files": "./app/__test__/*"
   }
 }
