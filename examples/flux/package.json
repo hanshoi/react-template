@@ -28,7 +28,7 @@
     "develop": true,
     "app_bundle": "app.build.js",
     "vendor_bundle": "vendor.build.js",
-    "app_entrypoint": "./app/index.js"
+    "app_entrypoint": "./app/app.js"
   },
   "babel": {
     "presets": [
