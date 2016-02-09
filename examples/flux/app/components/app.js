@@ -1,6 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import DynamicSearch from "./dynamicsearch";
+import CountryEditor from "./countryeditor";
 import CountryStore from "../stores/countrystore";
 import CountryActions from "../actions/actions";
 
@@ -9,6 +10,9 @@ class App extends React.Component{
   constructor() {
     super();
     this.state = CountryStore.getState();
+    this.storeChanged = (state) => {
+      this.setState(state);
+    };
   }
 
   componentDidMount() {
@@ -19,27 +23,14 @@ class App extends React.Component{
     CountryStore.unlisten(this.storeChanged);
   }
 
-  storeChanged = (state) => {
-    this.setState(state);
-  };
-
   render() {
     let countries = this.state.countries;
     return (
+      <div>
         <DynamicSearch countries={countries} />
+        <CountryEditor />
+      </div>
     );
-  }
-
-  addCountry() {
-    CountryActions.create({"name": "Anttinia"});
-  }
-
-  deleteCountry(id) {
-    CountryActions.delete(id);
-  }
-
-  editCountry(id, name) {
-    CountryActions.update({ id, name });
   }
 }
 

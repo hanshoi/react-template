@@ -33,11 +33,18 @@ class DynamicSearch extends React.Component {
       <div>
         <input type="text" value={this.state.searchString} onChange={this._handleUpdate} placeholder="search" />
         <ul>
-          { countries.map(function(country, index){ return <li key={index} >{country.name}</li> }) }
+          { countries.map(function(country, index){ return <li key={index} >{country.name}
+                                                    <button onClick={this.deleteCountry}>Delete</button>
+                                                    </li> }) }
         </ul>
       </div>
     );
   }
+
+  deleteCountry(name) {
+    CountryActions.delete(name);
+  }
+
 }
 
 export default DynamicSearch;
