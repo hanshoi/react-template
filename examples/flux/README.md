@@ -11,3 +11,4 @@ gulp
 * [navigating react ecosystem](http://www.toptal.com/react/navigating-the-react-ecosystem)
 * [alt](http://alt.js.org/guide/)
 * [react and (alt) flux](http://survivejs.com/webpack_react/react_and_flux/)
+* [alt-devtools](https://github.com/goatslacker/alt-devtool)
