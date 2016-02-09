@@ -3,6 +3,8 @@ Example of writing es6 with react.
 
 We are using babelify for transformations to ES5.
 
+Also changed to using of vendor bundles.
+
 ## Usage
 ```bash
 gulp

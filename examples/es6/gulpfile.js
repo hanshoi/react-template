@@ -26,7 +26,11 @@ function handleErrors() {
   var args = Array.prototype.slice.call(arguments);
   notify.onError({
     title: 'Compile Error',
-    message: '<%= error.message %>'
+    message: '<%= error.message %>',
+    notifier: function(options, callback) {
+      // disable the popup
+      callback();
+    }
   }).apply(this, args);
   this.emit('end'); // Keep gulp from hanging on this task
 }
@@ -56,7 +60,7 @@ gulp.task('watch', function() {
   });
   
   vendor_bundler.bundle()
-    .on('error', gutil.log)
+    .on('error', handleErrors)
     .pipe(source(pkg.vars.vendor_bundle))
     .pipe(gulp.dest(pkg.vars.build_folder))
     .pipe(size());

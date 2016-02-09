@@ -1,43 +1,43 @@
-var React = require('react');
+import React from "react";
 
-var DynamicSearch = React.createClass ({
-  getInitialState: function(){
-    return {
-      searchString: ''
-    };
-  },
+class DynamicSearch extends React.Component {
+  constructor() {
+    super();
+    this.state = { searchString: "" };
+    this._handleUpdate = this._handleUpdate.bind(this);
+  }
 
-  handleUpdate: function(event) {
+  _handleUpdate(event) {
     this.setState({
       searchString: event.target.value
     });
     console.log("Updated countries list.");
-  },
+  }
 
-  getFilteredCountries: function() {
-    var countries = this.props.countries;
-    var searchString = this.state.searchString.trim().toLowerCase();
+  getFilteredCountries() {
+    let countries = this.props.countries;
+    let searchString = this.state.searchString.trim().toLowerCase();
 
     if(searchString.length > 0){
-      countries = countries.filter(function(country){
+      countries = countries.filter(country => {
         return country.name.toLowerCase().match( searchString );
       });
     }
     return countries;
-  },
+  }
 
-  render: function() {
-    var countries = this.getFilteredCountries();
+  render() {
+    let countries = this.getFilteredCountries();
 
     return (
       <div>
-        <input type="text" value={this.state.searchString} onChange={this.handleUpdate} placeholder="awesome!" />
+        <input type="text" value={this.state.searchString} onChange={this._handleUpdate} placeholder="search" />
         <ul>
           { countries.map(function(country, index){ return <li key={index} >{country.name}</li> }) }
         </ul>
       </div>
     );
   }
-});
+}
 
-module.exports = DynamicSearch;
+export default DynamicSearch;

@@ -1,11 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
-//var DynamicSearch = require('./dynamicsearch.js');
+import DynamicSearch from "./dynamicsearch";
 
-/*
-var App = React.createClass({
-  getInitialState: function(){
-    return {
+
+class App extends React.Component{
+  constructor() {
+    super();
+    this.state =  {
       countries: [
         {"name": "Sweden"}, {"name": "China"}, {"name": "Peru"}, {"name": "Czech Republic"},
         {"name": "Bolivia"}, {"name": "Latvia"}, {"name": "Samoa"}, {"name": "Armenia"},
@@ -16,17 +16,14 @@ var App = React.createClass({
         {"name": "Spain"}, {"name": "Poland"}, {"name": "Haiti"}
       ]
     };
-  },
+  }
 
-  render: function(){
-    var countries = this.state.countries;
+  render() {
+    let countries = this.state.countries;
     return (
         <DynamicSearch countries={countries} />
     );
   }
-});
-*/
-ReactDOM.render(
-  <App />,
-  document.getElementById('content')
-);
+}
+
+export default App;
