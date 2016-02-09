@@ -1,18 +1,8 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-
-
-var Helloworld = React.createClass({
-  render: function(){
-    return (
-      <h1>Hello {this.props.name}!</h1>
-    );
-  }
-});
+var Helloworld = require("./hello.js");
 
 ReactDOM.render(
   <Helloworld name="World" />,
   document.getElementById('content')
 );
-
-module.exports = Helloworld;

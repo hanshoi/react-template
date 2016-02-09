@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
-var Helloworld = require('../app.js');
+var Helloworld = require('../hello.js');
 
 
 describe('React units tests', function() {
@@ -14,8 +14,8 @@ describe('React units tests', function() {
   });
 
   it("Helloworld prints Hello World", function() {
-    var h1 = TestUtils.findRenderedDOMComponentWithTag(this.dynamicsearch, 'h1');
-    expect(h1.text).toEqual("Hello World!");
+    var h1 = TestUtils.findRenderedDOMComponentWithTag(this.helloworld, 'h1');
+    expect(h1.textContent).toEqual("Hello World!");
   });
 
 });
