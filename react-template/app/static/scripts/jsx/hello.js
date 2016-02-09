@@ -1,12 +1,10 @@
-var React = require("react");
+import React from "react";
 
 
-var Helloworld = React.createClass({
-  render: function(){
+export default class Helloworld extends React.Component{
+  render() {
     return (
       <h1>Hello {this.props.name}!</h1>
     );
   }
-});
-
-module.exports = Helloworld;
+};

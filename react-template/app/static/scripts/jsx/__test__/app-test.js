@@ -1,20 +1,21 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var TestUtils = require('react-addons-test-utils');
-var expect = require('expect');
-var Helloworld = require('../hello.js');
+import React from "react";
+import ReactDOM from "react-dom";
+import TestUtils from "react-addons-test-utils";
+import expect from "expect";
+import Helloworld from "../hello";
 
 
-describe('React units tests', function() {
+describe('React units tests', () => {
+  let helloworld;
 
-  before("set helloworld with World as name", function(){
-    this.helloworld = TestUtils.renderIntoDocument(
+  before("set helloworld with World as name", () => {
+    helloworld = TestUtils.renderIntoDocument(
         <Helloworld name="World" />
     );
   });
 
-  it("Helloworld prints Hello World", function() {
-    var h1 = TestUtils.findRenderedDOMComponentWithTag(this.helloworld, 'h1');
+  it("Helloworld prints Hello World", () => {
+    let h1 = TestUtils.findRenderedDOMComponentWithTag(helloworld, 'h1');
     expect(h1.textContent).toEqual("Hello World!");
   });
 

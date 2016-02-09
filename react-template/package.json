@@ -12,8 +12,12 @@
     "react-dom": "^0.14.6"
   },
   "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.5.0",
+    "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.1",
+    "babel-runtime": "^6.5.0",
     "babelify": "^7.2.0",
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
@@ -42,7 +46,7 @@
     "develop": true,
     "app_bundle": "build.js",
     "app_bundle_min": "build.min.js",
-    "app_entrypoint": "./app/static/scripts/jsx/app.js",
+    "app_entrypoint": "./app/static/scripts/jsx/index.js",
     "template_folder": "app/templates",
     "scss_files": "./app/static/stylesheets/scss/*.scss",
     "css_folder": "./app/static/stylesheets/css/",
