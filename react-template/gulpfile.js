@@ -14,6 +14,7 @@ var streamify = require('gulp-streamify');
 var htmlreplace = require('gulp-html-replace');
 var livereload = require('gulp-livereload');
 var mocha = require('gulp-spawn-mocha');
+var _ = require('underscore');
 var pkg = require('./package.json');
 
 
@@ -30,7 +31,6 @@ function getBundler() {
     entries: [pkg.vars.app_entrypoint],
     transform: [babelify],
     debug: pkg.vars.develop,
-    bundleExternal: false,    // prevent bundling vendor packages (react, react-dom)
     cache: {}, packageCache: {}, fullPaths: true
   }));
 }
@@ -41,7 +41,11 @@ function handleErrors() {
   var args = Array.prototype.slice.call(arguments);
   notify.onError({
     title: 'Compile Error',
-    message: '<%= error.message %>'
+    message: '<%= error.message %>',
+    notifier: function(options, callback){
+      // disables popup
+      callback();
+    }
   }).apply(this, args);
   this.emit('end'); // Keep gulp from hanging on this task
 }
@@ -66,10 +70,12 @@ gulp.task('watch', function() {
       console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 
-  var watcher = watchify(getBundler());
+  var app_bundler = getBundler();
 
   function rebundle() {
-    watcher.bundle()
+    app_bundler
+      .external(_.keys(pkg.dependencies))
+      .bundle()
       .on('error', handleErrors)
       .pipe(source(pkg.vars.app_bundle))
       .pipe(gulp.dest(pkg.vars.build_folder))
@@ -79,7 +85,19 @@ gulp.task('watch', function() {
   }
 
   rebundle();
-  return watcher.on('update', rebundle);
+  app_bundler.on('update', rebundle);
+
+  var vendor_bundler = browserify({debug: pkg.vars.develop});
+  _.keys(pkg.dependencies).forEach(function(dependency){
+    vendor_bundler.require(dependency);
+  });
+  
+  vendor_bundler.bundle()
+    .on('error', handleErrors)
+    .pipe(source(pkg.vars.vendor_bundle))
+    .pipe(gulp.dest(pkg.vars.build_folder))
+    .pipe(size());
+
 });
 
 
