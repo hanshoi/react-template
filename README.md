@@ -16,7 +16,7 @@ Number|Name|Description
 07|[bower-sass](https://github.com/hanshoi/react-template/tree/master/examples/bower-sass)|Example of using bower and SASS with react, also bootstrap added as a novelty.
 08|[testing](https://github.com/hanshoi/react-template/tree/master/examples/testing)|Testing react and server side code
 09|[ES6](https://github.com/hanshoi/react-template/tree/master/examples/es6)|Using react and ES6 together
-10|[python prerendering](https://github.com/hanshoi/react-template/tree/master/examples/prerendering)|Prerendering pages in python using python-react
+10|[isomorphic](https://github.com/hanshoi/react-template/tree/master/examples/isomorphic)|Isomorphic web application using react and alt
 
 ## nodeenv (optional)
 [nodeenv](https://github.com/ekalinin/nodeenv) is like virtualenv in python and enables you to install certain versions of software in a virtual environment and not
