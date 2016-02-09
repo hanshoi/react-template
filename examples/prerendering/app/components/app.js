@@ -19,20 +19,6 @@ class App extends React.Component{
     };
   }
 
-  componentDidMount() {
-    // request countries information from server when component has mounted
-    this.serverRequest = $.get(this.props.url, data => {
-      if ( data.countries != undefined ) {
-        this.setState({countries: data.countries});
-      }
-    }, "json");
-  }
-
-  componentWillUnmount() {
-    // abort all ongoing ajax calls as not needed
-    this.serverRequest.abort();
-  }
-
   render() {
     let countries = this.state.countries;
     return (

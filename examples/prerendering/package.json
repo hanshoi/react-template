@@ -27,7 +27,7 @@
     "watchify": "^3.7.0"
   },
   "vars": {
-    "build_folder": "app/static",
+    "build_folder": "app/dist",
     "develop": true,
     "app_bundle": "app.build.js",
     "vendor_bundle": "vendor.build.js",
