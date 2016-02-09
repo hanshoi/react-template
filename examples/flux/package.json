@@ -1,7 +1,7 @@
 {
-  "name": "isomorphic-example",
+  "name": "flux-example",
   "version": "0.0.1",
-  "description": "Isomorphic web application using react and alt (flux)",
+  "description": "Flux patterned web application using react and alt (flux)",
   "author": "Antti Ruotsalainen",
   "license": "MIT",
   "dependencies": {
@@ -9,6 +9,7 @@
     "react-dom": "^0.14.6"
   },
   "devDependencies": {
+    "alt": "^0.18.2",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.4.3",

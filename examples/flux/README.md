@@ -1,5 +1,5 @@
-# Isomorphic
-Isomorphic web application with react and alt.
+# flux
+Creating flux patterned web application with react and alt.
 
 ## Usage
 ```bash
