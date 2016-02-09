@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 import DynamicSearch from "./dynamicsearch";
 
 
@@ -16,6 +17,20 @@ class App extends React.Component{
         {"name": "Spain"}, {"name": "Poland"}, {"name": "Haiti"}
       ]
     };
+  }
+
+  componentDidMount() {
+    // request countries information from server when component has mounted
+    this.serverRequest = $.get(this.props.url, data => {
+      if ( data.countries != undefined ) {
+        this.setState({countries: data.countries});
+      }
+    }, "json");
+  }
+
+  componentWillUnmount() {
+    // abort all ongoing ajax calls as not needed
+    this.serverRequest.abort();
   }
 
   render() {
