@@ -6,7 +6,13 @@ import CountryActions from "./actions/actions";
 class CountryStore {
   constructor(){
     this.bindActions(CountryActions);
-    this.countries = [];
+    this.countries = [
+      {"name": "Sweden", "id": uuid.v4()},
+      {"name": "China", "id": uuid.v4()},
+      {"name": "Peru", "id": uuid.v4()},
+      {"name": "Czech Republic", "id": uuid.v4()},
+      {"name": "Bolivia", "id": uuid.v4()}
+    ];
   }
 
   create(country){
