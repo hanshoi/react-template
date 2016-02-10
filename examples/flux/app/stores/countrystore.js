@@ -8,17 +8,18 @@ class CountryStore {
     this.countries = [];
   }
 
-  create(country){
+  create(name){
     const countries = this.countries;
-    country.id = uuid.v4();
+    country.name = name;
     this.setState({
       countries: countries.concat(country)
     });
   }
 
   delete(name){
+    console.log("deleting country "+name);
     this.setState({
-      countries: this.countries.filter(country => country.name !== name)
+      countries: this.countries.filter(country => country.name != name)
     });
   }
 }

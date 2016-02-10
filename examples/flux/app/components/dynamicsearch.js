@@ -5,6 +5,7 @@ class DynamicSearch extends React.Component {
     super();
     this.state = { searchString: "" };
     this._handleUpdate = this._handleUpdate.bind(this);
+    this.deleteCountry = this.deleteCountry.bind(this);
   }
 
   _handleUpdate(event) {
@@ -34,15 +35,15 @@ class DynamicSearch extends React.Component {
         <input type="text" value={this.state.searchString} onChange={this._handleUpdate} placeholder="search" />
         <ul>
           { countries.map(function(country, index){ return <li key={index} >{country.name}
-                                                    <button onClick={this.deleteCountry}>Delete</button>
+                                                    <button name={country.name} onClick={this.deleteCountry}>Delete</button>
                                                     </li> }) }
         </ul>
       </div>
     );
   }
 
-  deleteCountry(name) {
-    CountryActions.delete(name);
+  deleteCountry(event) {
+    CountryActions.delete(event.target.name);
   }
 
 }

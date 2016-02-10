@@ -1,5 +1,4 @@
 import React from "react";
-import $ from "jquery";
 import DynamicSearch from "./dynamicsearch";
 import CountryEditor from "./countryeditor";
 import CountryStore from "../stores/countrystore";
