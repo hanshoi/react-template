@@ -6,14 +6,13 @@ var watchify = require('watchify');
 var babelify = require('babelify');
 var notify = require('gulp-notify');
 var size = require('gulp-size');
-var _ = require('underscore');
 var pkg = require('./package.json');
 
 
 // create a watcher for .js files by wrapping browserify with watchify
-function getBundler() {
+function getBundler(entries) {
   return watchify(browserify({
-    entries: [pkg.vars.client_entrypoint],
+    entries: [entries],
     transform: [babelify],
     debug: pkg.vars.develop,
     cache: {}, packageCache: {}, fullPaths: true
@@ -36,36 +35,45 @@ function handleErrors() {
 }
 
 
-// main development task
-gulp.task('watch', function() {
-  var client_bundler = getBundler();
+function basicBundle(entries, bundle, folder_out){
+  var bundler = getBundler(entries);
 
-  function rebundleApp() {
-    client_bundler
-      .external(_.keys(pkg.dependencies))
+  function rebundle() {
+    bundler
+      .external(pkg.vars.client_dependencies)
       .bundle()
       .on('error', handleErrors)
-      .pipe(source(pkg.vars.client_bundle))
-      .pipe(gulp.dest(pkg.vars.client_out))
+      .pipe(source(bundle))
+      .pipe(gulp.dest(folder_out))
       .pipe(size());
-    gutil.log("Rebundle client app...");
+    gutil.log("Rebundle " + bundle + "...");
   }
 
-  rebundleApp();
-  client_bundler.on('update', rebundleApp);
+  rebundle();
+  bundler.on('update', rebundle);
+}
+
+
+// main development task
+gulp.task('watch', function() {
+  basicBundle(pkg.vars.client_entrypoint, 
+              pkg.vars.client_bundle, 
+              pkg.vars.client_out);
+  basicBundle(pkg.vars.server_entrypoint, 
+              pkg.vars.server_bundle, 
+              pkg.vars.server_out);
 
   // Bundle vendor apps
   var vendor_bundler = browserify({debug: pkg.vars.develop});
-  _.keys(pkg.dependencies).forEach(function(dependency){
+  pkg.vars.client_dependencies.forEach(function(dependency){
     vendor_bundler.require(dependency);
   });
-  
+
   vendor_bundler.bundle()
     .on('error', handleErrors)
     .pipe(source(pkg.vars.vendor_bundle))
     .pipe(gulp.dest(pkg.vars.client_out))
     .pipe(size());
-
 });
 
 // default task
