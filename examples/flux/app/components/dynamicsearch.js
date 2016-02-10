@@ -1,4 +1,6 @@
 import React from "react";
+import CountryActions from "../actions/actions";
+
 
 class DynamicSearch extends React.Component {
   constructor() {
@@ -34,9 +36,10 @@ class DynamicSearch extends React.Component {
       <div>
         <input type="text" value={this.state.searchString} onChange={this._handleUpdate} placeholder="search" />
         <ul>
-          { countries.map(function(country, index){ return <li key={index} >{country.name}
-                                                    <button name={country.name} onClick={this.deleteCountry}>Delete</button>
-                                                    </li> }) }
+          { countries.map((country, index) => { 
+            return <li key={index} >{country.name}
+              <button name={country.name} onClick={this.deleteCountry}>Delete</button>
+              </li> }) }
         </ul>
       </div>
     );

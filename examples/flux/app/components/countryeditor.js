@@ -1,9 +1,12 @@
 import React from "react";
+import CountryActions from "../actions/actions";
+
 
 class CountryEditor extends React.Component {
   constructor() {
     super();
     this._handleUpdate = this._handleUpdate.bind(this);
+    this.addCountry = this.addCountry.bind(this);
     this.state = { name: ''};
   }
 

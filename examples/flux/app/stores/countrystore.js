@@ -10,7 +10,7 @@ class CountryStore {
 
   create(name){
     const countries = this.countries;
-    country.name = name;
+    let country = {name};
     this.setState({
       countries: countries.concat(country)
     });
