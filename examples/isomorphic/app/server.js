@@ -7,8 +7,14 @@ import App from "./components/app";
 const app = express();
 const port = 3000;
 
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+
 app.get('/', (request, response) => {
-  response.send(ReactDOMServer.renderToString(<App />));
+  response.render({
+    app: ReactDOMServer.renderToString(<App />)
+  });
 });
 
 

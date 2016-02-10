@@ -38,6 +38,7 @@
     "develop": true,
     "js_out": "build",
     "js_files": "app/**/*.js",
+    "html_files": "app/**/*.handlebars",
     "client_bundle": "client.build.js",
     "vendor_bundle": "vendor.build.js",
     "client_entrypoint": "./app/client.js",

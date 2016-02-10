@@ -34,6 +34,13 @@ function handleErrors() {
 }
 
 
+// copy html into build folder
+gulp.task('copy', function(){
+  gulp.src(pkg.vars.html_files)
+    .pipe(gulp.dest(pkg.vars.js_out));
+});
+
+
 gulp.task('clean', function() {
   return gulp.src([pkg.vars.js_out+'/*'], {read: false}).pipe(clean());
 });
@@ -66,7 +73,7 @@ function basicBundle(entries, bundleName, watch){
 
 
 // main development task
-gulp.task('watch', ["clean", "javascript"], function() {
+gulp.task('watch', ["clean", "javascript", "copy"], function() {
 
   // client
   basicBundle(pkg.vars.client_entrypoint, 
@@ -86,6 +93,9 @@ gulp.task('watch', ["clean", "javascript"], function() {
 
   // JS
   gulp.watch(pkg.vars.js_files, ['javascript']);
+
+  // HTML
+  gulp.watch(pkg.vars.html_files, ['copy']);
 
   // nodemon
   nodemon({
