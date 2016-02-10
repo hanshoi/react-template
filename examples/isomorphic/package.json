@@ -1,7 +1,7 @@
 {
-  "name": "flux-example",
+  "name": "isomorphic-example",
   "version": "0.0.1",
-  "description": "Flux patterned web application using react and alt (flux)",
+  "description": "Isomorphic web application using react, alt and nodejs",
   "author": "Antti Ruotsalainen",
   "license": "MIT",
   "dependencies": {
