@@ -73,7 +73,7 @@ function basicBundle(entries, bundleName, watch){
 
 
 // main development task
-gulp.task('watch', ["clean", "javascript", "copy"], function() {
+gulp.task('watch', ["javascript", "copy"], function() {
 
   // client
   basicBundle(pkg.vars.client_entrypoint, 
