@@ -35,16 +35,16 @@ function handleErrors() {
 }
 
 
-function basicBundle(entries, bundle, folder_out){
+function basicBundle(entries, bundle, externals){
   var bundler = getBundler(entries);
 
   function rebundle() {
     bundler
-      .external(pkg.vars.client_dependencies)
+      .external(externals)
       .bundle()
       .on('error', handleErrors)
       .pipe(source(bundle))
-      .pipe(gulp.dest(folder_out))
+      .pipe(gulp.dest(pkg.vars.out))
       .pipe(size());
     gutil.log("Rebundle " + bundle + "...");
   }
@@ -56,12 +56,13 @@ function basicBundle(entries, bundle, folder_out){
 
 // main development task
 gulp.task('watch', function() {
+  // client
   basicBundle(pkg.vars.client_entrypoint, 
-              pkg.vars.client_bundle, 
-              pkg.vars.client_out);
+              pkg.vars.client_bundle,
+              pkg.vars.client_dependencies);
+  // server
   basicBundle(pkg.vars.server_entrypoint, 
-              pkg.vars.server_bundle, 
-              pkg.vars.server_out);
+              pkg.vars.server_bundle, []);
 
   // Bundle vendor apps
   var vendor_bundler = browserify({debug: pkg.vars.develop});
@@ -72,7 +73,7 @@ gulp.task('watch', function() {
   vendor_bundler.bundle()
     .on('error', handleErrors)
     .pipe(source(pkg.vars.vendor_bundle))
-    .pipe(gulp.dest(pkg.vars.client_out))
+    .pipe(gulp.dest(pkg.vars.out))
     .pipe(size());
 });
 

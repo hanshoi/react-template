@@ -5,7 +5,7 @@
   "author": "Antti Ruotsalainen",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node server"
+    "start": "babel-node --debug server"
   },
   "dependencies": {
     "react": "^0.14.6",
@@ -27,15 +27,18 @@
     "watchify": "^3.7.0"
   },
   "vars": {
-    "client_dependencies": ["react", "react-dom", "alt"],
-    "client_out": "client/generated",
-    "server_out": "server/generated",
+    "client_dependencies": [
+      "react",
+      "react-dom",
+      "alt"
+    ],
+    "out": "build",
     "develop": true,
-    "client_bundle": "bundle.js",
-    "vendor_bundle": "vendor.build.js",
-    "server_bundle": "server.build.js",
+    "client_bundle": "client.js",
+    "vendor_bundle": "vendor.js",
+    "server_bundle": "server.js",
     "client_entrypoint": "./client/index.js",
-    "server_entrypoint": "./client/components/app.js"
+    "server_entrypoint": "./server/index.js"
   },
   "babel": {
     "presets": [

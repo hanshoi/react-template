@@ -1,7 +1,8 @@
 import express from 'express';
+import handlebars from "express-handlebars";
 import React from  "react";
 import ReactDOMServer from "react-dom/server";
-import App from "./generated/server.build";
+import App from "../client/components/app";
  
 const app = express();
  
