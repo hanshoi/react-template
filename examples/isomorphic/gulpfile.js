@@ -8,7 +8,6 @@ var babelify = require("babelify");
 var notify = require('gulp-notify');
 var size = require('gulp-size');
 var clean = require('gulp-clean');
-//var livereload = require('gulp-livereload');
 var nodemon = require('gulp-nodemon');
 var pkg = require('./package.json');
 
@@ -68,6 +67,7 @@ function basicBundle(entries, bundleName, watch){
 
 // main development task
 gulp.task('watch', ["clean", "javascript"], function() {
+
   // client
   basicBundle(pkg.vars.client_entrypoint, 
               pkg.vars.client_bundle);
@@ -88,10 +88,10 @@ gulp.task('watch', ["clean", "javascript"], function() {
   gulp.watch(pkg.vars.js_files, ['javascript']);
 
   // nodemon
-/*  nodemon({
+  nodemon({
     script: pkg.vars.server_entrypoint,
     watch: pkg.vars.js_out
-  }); */
+  });
 });
 
 
