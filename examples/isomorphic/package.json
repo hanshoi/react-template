@@ -5,7 +5,7 @@
   "author": "Antti Ruotsalainen",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node --debug server"
+    "start": "nodemon --debug -w build build/server.js"
   },
   "dependencies": {
     "react": "^0.14.6",
@@ -20,6 +20,8 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-nodemon": "^2.0.6",
     "gulp-notify": "^2.2.0",
     "gulp-size": "^2.0.0",
     "gulp-util": "^3.0.7",
@@ -32,13 +34,13 @@
       "react-dom",
       "alt"
     ],
-    "out": "build",
     "develop": true,
-    "client_bundle": "client.js",
-    "vendor_bundle": "vendor.js",
-    "server_bundle": "server.js",
-    "client_entrypoint": "./client/index.js",
-    "server_entrypoint": "./server/index.js"
+    "js_out": "build",
+    "js_files": "app/**/*.js",
+    "client_bundle": "client.build.js",
+    "vendor_bundle": "vendor.build.js",
+    "client_entrypoint": "./app/client.js",
+    "server_entrypoint": "./build/server.js"
   },
   "babel": {
     "presets": [

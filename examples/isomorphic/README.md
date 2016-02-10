@@ -1,6 +1,11 @@
 # isomorphic
 Creating flux patterned web application with react, alt and express.
 
+Direct javascript conversion is for server side to work properly and
+ browserify packaging is for client side to work properly.
+
+Setup livereloading as well.
+
 ## Usage
 ```bash
 gulp
