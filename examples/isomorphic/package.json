@@ -1,9 +1,12 @@
 {
   "name": "isomorphic-example",
   "version": "0.0.1",
-  "description": "Isomorphic web application using react, alt and nodejs",
+  "description": "Isomorphic web application using react, alt and express",
   "author": "Antti Ruotsalainen",
   "license": "MIT",
+  "scripts": {
+    "start": "babel-node server"
+  },
   "dependencies": {
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
@@ -15,6 +18,8 @@
     "babel-register": "^6.4.3",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-notify": "^2.2.0",
     "gulp-size": "^2.0.0",
@@ -24,16 +29,20 @@
     "watchify": "^3.7.0"
   },
   "vars": {
-    "build_folder": "app/dist",
+    "client_out": "client/generated",
+    "server_out": "server/generated",
     "develop": true,
-    "app_bundle": "app.build.js",
+    "client_bundle": "bundle.js",
     "vendor_bundle": "vendor.build.js",
-    "app_entrypoint": "./app/index.js"
+    "server_bundle": "server.build.js",
+    "client_entrypoint": "./client/index.js",
+    "server_entrypoint": "./client/components/app.js"
   },
   "babel": {
     "presets": [
       "es2015",
       "react"
-    ]
+    ],
+    "ignore": "node_modules"
   }
 }

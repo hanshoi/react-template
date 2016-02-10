@@ -13,7 +13,7 @@ var pkg = require('./package.json');
 // create a watcher for .js files by wrapping browserify with watchify
 function getBundler() {
   return watchify(browserify({
-    entries: [pkg.vars.app_entrypoint],
+    entries: [pkg.vars.client_entrypoint],
     transform: [babelify],
     debug: pkg.vars.develop,
     cache: {}, packageCache: {}, fullPaths: true
@@ -38,22 +38,23 @@ function handleErrors() {
 
 // main development task
 gulp.task('watch', function() {
-  var app_bundler = getBundler();
+  var client_bundler = getBundler();
 
   function rebundleApp() {
-    app_bundler
+    client_bundler
       .external(_.keys(pkg.dependencies))
       .bundle()
       .on('error', handleErrors)
-      .pipe(source(pkg.vars.app_bundle))
-      .pipe(gulp.dest(pkg.vars.build_folder))
+      .pipe(source(pkg.vars.client_bundle))
+      .pipe(gulp.dest(pkg.vars.client_out))
       .pipe(size());
-    gutil.log("Rebundle app...");
+    gutil.log("Rebundle client app...");
   }
 
   rebundleApp();
-  app_bundler.on('update', rebundleApp);
+  client_bundler.on('update', rebundleApp);
 
+  // Bundle vendor apps
   var vendor_bundler = browserify({debug: pkg.vars.develop});
   _.keys(pkg.dependencies).forEach(function(dependency){
     vendor_bundler.require(dependency);
@@ -62,7 +63,7 @@ gulp.task('watch', function() {
   vendor_bundler.bundle()
     .on('error', handleErrors)
     .pipe(source(pkg.vars.vendor_bundle))
-    .pipe(gulp.dest(pkg.vars.build_folder))
+    .pipe(gulp.dest(pkg.vars.client_out))
     .pipe(size());
 
 });
