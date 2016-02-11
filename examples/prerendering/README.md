@@ -1,9 +1,11 @@
-# Isomorphic
-  
+# prerendering
+Prerendering web application with react and express.
+
+Direct javascript conversion is for server side to work properly and
+ browserify packaging is for client side to work properly.
 
 ## Usage
 ```bash
-npm install
 gulp
 ```
 
