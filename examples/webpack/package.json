@@ -5,6 +5,7 @@
   "author": "Antti Ruotsalainen",
   "license": "MIT",
   "dependencies": {
+    "jquery": "^2.2.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
   }
