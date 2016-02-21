@@ -18,7 +18,7 @@ Number|Name|Description
 09|[ES6](https://github.com/hanshoi/react-template/tree/master/examples/es6)|Using react and ES6 together
 10|[flux](https://github.com/hanshoi/react-template/tree/master/examples/flux)|Flux patterned web application using react and alt
 11|[prerendering](https://github.com/hanshoi/react-template/tree/master/examples/prerendering)|Prerendering web application using react and express.
-12|[isomorphic](https://github.com/hanshoi/react-template/tree/master/examples/isomorphic)|Isomorphic web application using react, alt and express.
+12|[isomorphic](https://github.com/hanshoi/react-template/tree/master/examples/isomorphic)|Isomorphic web application using react, alt and express. TODO: finish this
 
 ## nodeenv (optional)
 [nodeenv](https://github.com/ekalinin/nodeenv) is like virtualenv in python and enables you to install certain versions of software in a virtual environment and not
