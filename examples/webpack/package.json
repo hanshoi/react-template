@@ -1,5 +1,5 @@
 {
-  "name": "webpack",
+  "name": "webpack-example",
   "version": "0.0.1",
   "description": "Example of webpack with react.",
   "author": "Antti Ruotsalainen",
@@ -8,5 +8,10 @@
     "jquery": "^2.2.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
+  },
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.3",
+    "webpack": "^1.12.13"
   }
 }
