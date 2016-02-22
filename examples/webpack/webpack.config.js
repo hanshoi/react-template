@@ -26,19 +26,14 @@ module.exports = {
         // for sourcemaps you need to pass css?sourceMaps and sass?sourceMaps to loaders
         loaders: ['style', 'css', 'sass'],
         include: PATHS.app
-      }
-
       },
+
       // Set up jsx. This accepts js too thanks to RegExp
       {
         test: /\.jsx?$/,
-        // Enable caching for improved performance during development
-        loaders: ['babel?cacheDirectory'],
-        // Parse only app files! Without this it will go through entire project.
-        // In addition to being slow, that will most likely result in an error.
-        include: PATHS.app
+        loader: 'babel',
+        include: PATHS.app,
         query: {
-          cacheDirectory: true,
           presets: ['react', 'es2015']
         }
       }
